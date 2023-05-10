@@ -8,6 +8,7 @@ import constants
 
 
 class Player(pygame.sprite.Sprite):
+    rect = 0
     def __init__(self, sprites):
         super(Player, self).__init__()
         self.timer = 0
@@ -24,15 +25,28 @@ class Player(pygame.sprite.Sprite):
     def update(self, pressed_keys):
         self.timer += 1
 
-        if pressed_keys[K_LEFT]:
-            self.rect.move_ip(-5, 0)
-        if pressed_keys[K_RIGHT]:
-            self.rect.move_ip(5, 0)
+        if pressed_keys == 1 or pressed_keys == 3:
+            self.rect.move_ip(-10, 0)
+        if pressed_keys == 0 or pressed_keys == 2:
+            self.rect.move_ip(10, 0)
 
         if self.rect.left < 0:
             self.rect.left = 0
         if self.rect.right > constants.SCREEN_WIDTH:
             self.rect.right = constants.SCREEN_WIDTH
+
+    @staticmethod
+    def updateAI(pressed_keys):
+
+        if pressed_keys == 1:
+            Player.rect.move_ip(-5, 0)
+        if pressed_keys == 2:
+            Player.rect.move_ip(5, 0)
+
+        if Player.rect.left < 0:
+            Player.rect.left = 0
+        if Player.rect.right > constants.SCREEN_WIDTH:
+            Player.rect.right = constants.SCREEN_WIDTH
 
     def get_surf(self):
         if self.timer % self.interval == 0:

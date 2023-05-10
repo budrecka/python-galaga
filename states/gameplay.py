@@ -165,8 +165,9 @@ class Gameplay(BaseState):
     def draw(self, screen):
         self.starfield.render(screen)
         pressed_keys = pygame.key.get_pressed()
+        ai_key = constants.BTN
         for entity in self.all_sprites:
-            entity.update(pressed_keys)
+            entity.update(ai_key)
 
         for entity in self.control_sprites:
             entity.update(pressed_keys)
@@ -232,3 +233,6 @@ class Gameplay(BaseState):
         screen.blit(score, (constants.SCREEN_WIDTH / 2 - score.get_rect().width / 2, 10))
         score = self.font.render(str(self.high_score), True, (255, 255, 255))
         screen.blit(score, (constants.SCREEN_WIDTH / 2 - score.get_rect().width / 2, 40))
+
+    def move(self, inputVal):
+        self.player.updateAI(inputVal)
