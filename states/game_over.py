@@ -1,4 +1,8 @@
+import time
+
 import pygame
+
+import constants
 from .base_state import BaseState
 
 
@@ -7,6 +11,7 @@ class GameOver(BaseState):
         super(GameOver, self).__init__()
         self.title = self.font.render("Game Over", True, pygame.Color("white"))
         self.title_rect = self.title.get_rect(center=self.screen_rect.center)
+        constants.STARTTIME = time.time()
         self.instructions = self.font.render(
             "Press R to start again, or enter to go to the menu",
             True, pygame.Color("white"))

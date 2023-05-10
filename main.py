@@ -84,10 +84,10 @@ for episode in range(num_episodes):
 
     import time
 
-    start_time = time.time()
+    constants.STARTTIME = time.time()
     while not Game.done:
         state = game.run()
-        reward = time.time() - start_time
+        reward = time.time() - constants.STARTTIME
 
         action, log_prob = policy.act(state)
 

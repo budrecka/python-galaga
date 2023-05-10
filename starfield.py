@@ -10,9 +10,9 @@ YELLOW = (120, 120, 0)
 
 class StarField():
     def __init__(self):
-        self.star_field_slow = self.create_stars(50)
-        self.star_field_medium = self.create_stars(35)
-        self.star_field_fast = self.create_stars(30)
+        self.star_field_slow = self.create_stars(1)
+        self.star_field_medium = self.create_stars(1)
+        self.star_field_fast = self.create_stars(1)
 
     def create_stars(self, number_of_stars):
         stars = []
