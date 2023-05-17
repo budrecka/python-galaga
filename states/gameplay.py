@@ -163,6 +163,7 @@ class Gameplay(BaseState):
                 self.all_sprites.add(rocket)
 
     def draw(self, screen):
+
         self.starfield.render(screen)
         pressed_keys = pygame.key.get_pressed()
         ai_key = constants.BTN
@@ -192,7 +193,6 @@ class Gameplay(BaseState):
                     self.high_score = self.score
                 self.all_sprites.add(Explosion(self.explosion_sprites, key.rect[0], key.rect[1]))
                 self.kill_sound.play()
-
         result = pygame.sprite.spritecollideany(self.player, self.enemy_rockets)
         if result:
             self.all_sprites.add(Explosion(self.explosion_sprites, result.rect[0], result.rect[1]))
@@ -233,6 +233,31 @@ class Gameplay(BaseState):
         screen.blit(score, (constants.SCREEN_WIDTH / 2 - score.get_rect().width / 2, 10))
         score = self.font.render(str(self.high_score), True, (255, 255, 255))
         screen.blit(score, (constants.SCREEN_WIDTH / 2 - score.get_rect().width / 2, 40))
+
+    # input number of lines
+    # return an arraylist of distances from ship to collision and second list of object types
+
+    def makeCollisionVectors(self, numLines):
+        x = self.player.rect.centerx
+        y = self.player.rect.centery
+        color = 0, 255, 0
+        vectors = []
+        for i in range(numLines):
+            if i < numLines/2:
+                xf = x - i * 10
+            else:
+                xf = x + i * 10
+            if xf < 0:
+                xf = 0
+            if xf > constants.SCREEN_WIDTH:
+                xf = constants.SCREEN_WIDTH
+
+            rect = pygame.draw.line(color=color, start_pos=(x, y), end_pos=(xf, 300))
+            vectors.append(rect)
+        return vectors
+
+
+
 
     def move(self, inputVal):
         self.player.updateAI(inputVal)
